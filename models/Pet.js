@@ -34,7 +34,7 @@ const PetSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    profileImage: {
+    profile: {
         type: String,
         required: [true, 'Picture Required'],
     },
