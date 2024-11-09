@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const pet = require('./routes/pet');
-const connectDB = require('./db/connect')
+const connectDB = require('./db/connect');
+const path = require('path');
+const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const {CloudinaryStorage} = require('multer-storage-cloudinary');
+const Pet = require('./models/Pet');
 const port = process.env.PORT || 5000
 
 app.set('view engine', 'ejs');
@@ -19,7 +24,7 @@ app.use(express.json());
 //Routes
 app.use(notFound)
 app.use(errorHandlerMiddleware);
-app.get('/', getAllPets);
+app.use('/api/pets', pet);
 
 app.get('/index', function(req,res){
     res.render('index')
