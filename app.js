@@ -2,33 +2,34 @@ const express = require('express');
 const app = express();
 const pet = require('./routes/pet');
 const connectDB = require('./db/connect');
-const path = require('path');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const {CloudinaryStorage} = require('multer-storage-cloudinary');
-const Pet = require('./models/Pet');
 const port = process.env.PORT || 5000
+const bodyParser = require('body-parser');
+const path = require('path');
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+//cloudinary configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 //Local Middleware
 const notFound = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
-//Library Middleware
-app.use(express.urlencoded({ extended: true}))
-app.use(express.static('./public'))
-app.use(express.json());
-
+//app config
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true}))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use('/', pet)
 //Routes
 app.use(notFound)
 app.use(errorHandlerMiddleware);
-app.use('/api/pets', pet);
 
-app.get('/index', function(req,res){
-    res.render('index')
-})
+
 
 //Initiate Server
 const serverInit = async () =>{

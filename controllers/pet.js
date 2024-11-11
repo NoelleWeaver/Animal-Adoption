@@ -2,15 +2,26 @@ const Pet = require('../models/Pet')
 const asyncWrapper = require('../middleware/async')
 const {createCustomError} = require('../errors/custom-error')
 
+//get addPets page
+const getAddPetsPage = async(req,res) => {
+    try{
+        res.status(200).render('addPet')
+    } catch(error) {
+        res.status(500).render('404', {error})
+    }
+}
+const getAdminPetsPage = async(req,res) => {
+    try {
+        const pets = await Pet.find({})
+        res.status(200).render('adminPets', {pets})
+    } catch(error){
+        res.status(500).render('404', {error})
+    }
+    }
+
 const getAllPets = asyncWrapper(async (req, res) => {
     const pets = await Pet.find({})
-    res.status(200).json({pets});
-})
-
-const createPet = asyncWrapper(async (req, res) => {
-    const pet = Pet.create(req.body)
-    console.log(req.body)//To check what is being made for dev only...
-    res.status(201).json({pet})
+    res.status(200).render('index', {pets});
 })
 
 const getPet = asyncWrapper(async (req, res) => {
@@ -44,4 +55,4 @@ const updatePet = asyncWrapper(async(req, res) =>{
     res.status(200).json({pet})
 })
 
-module.exports = {getAllPets, createPet, getPet, deletePet, updatePet}
+module.exports = {getAddPetsPage, getAdminPetsPage, getAllPets, getPet, deletePet, updatePet}

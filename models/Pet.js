@@ -11,18 +11,9 @@ const PetSchema = new mongoose.Schema({
         required: [true, 'Age Required'],
         min: [0, 'Age cannot be less than 0']
     },
-    location: {
-        type: String,
-        required: [true, 'Location Required'],
-        trim: true
-    },
     breed: {
         type: String,
         required: [true, 'Breed Required'],
-        trim: true
-    },
-    description: {
-        type: String,
         trim: true
     },
     behavior: {
@@ -30,21 +21,24 @@ const PetSchema = new mongoose.Schema({
         required: [true, 'Behavior Required'],
         trim: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     history: {
         type: String,
         trim: true
     },
-    profile: {
+    city: {
         type: String,
-        required: [true, 'Picture Required'],
+        required: [true, 'City Required'],
+        trim: true
     },
-    images: {
-        type: [String], 
-        validate: {
-            validator: (val) => val.length <= 5,
-            message: 'You can upload a maximum of 5 images'
-        }
+    imageURL: {
+        type: String,
+        default: '',
+        required: [true, 'Profile Image Required']
     }
-});
+    });
 
 module.exports = mongoose.model('Pet', PetSchema)

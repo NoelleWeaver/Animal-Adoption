@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Document</title>
 </head>
 <body>
-    <a href="adminPets">admin page</a>
-    <a href="/addPet">Add Pet</a>
+    <a href="/">return to home</a>
     <% if(!pets || pets.length === 0) { %>
         <h5>No pets available</h5>
         <% } else { %>
             <% pets.forEach(function(pet) { %>
                 <h5> <%= pet.name %></h5>
+                <form action="/pets/delete/<%= pet.id %>" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
             <% }); %>
         <% } %>
 </body>
