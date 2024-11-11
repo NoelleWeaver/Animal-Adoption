@@ -7,6 +7,7 @@ const cloudinary = require('cloudinary').v2;
 const {CloudinaryStorage} = require('multer-storage-cloudinary');
 const port = process.env.PORT || 5000
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 //cloudinary configuration
@@ -29,6 +30,8 @@ app.use('/petProfile', pet)
 //Routes
 app.use(notFound)
 app.use(errorHandlerMiddleware);
+app.use(cookieParser());
+app.use(express.json()); 
 
 
 
