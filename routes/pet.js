@@ -29,12 +29,13 @@ const {
 router.route('/').get(getAllPets);
 router.route('/addPet').get(getAddPetsPage);
 router.route('/adminPets').get(getAdminPetsPage);
-// router.route('/:id').get(getPet).patch(updatePet).delete(deletePet);
+router.route('/:id').get(getPet);
 //route to create pets and deal with the form submission
 router.post('/pets/create', upload.single('image'), async(req,res) => {
     try {
-        const { name } = req.body
-        const newPet = new Pet({ name })
+        const { name, gender, age, breed, description  } = req.body
+        const imageURL = req.file ? req.file.path : null
+        const newPet = new Pet({ name, gender, age, breed, description, history, city, type, behavior, imageURL })
         await newPet.save()
         res.status(201).render('success', { newPet})
     } catch(error) {
@@ -59,6 +60,12 @@ router.post('/pets/delete/:id', async(req, res) => {
 //     await newPet.save() //.save only works if you have the model variable imported in this case its pet
 //     res.redirect('/')
 // })
+
+router.route('/:id')
+    .get((req, res, next) => {
+        console.log(`GET /pets/${req.params.id} -> getPet`);
+        next();
+    }, getPet)
 
 
 module.exports = router;

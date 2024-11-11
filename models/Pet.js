@@ -34,6 +34,21 @@ const PetSchema = new mongoose.Schema({
         required: [true, 'City Required'],
         trim: true
     },
+    gender: {
+        type: String,
+        required: [true, 'Gender Required'],
+        enum: ['Male', 'Female', 'Other']
+    },
+    type: {
+        type: String,
+        required: [true, 'Type Required'],
+        enum: ['Dog', 'Cat', 'Bird', 'Reptile', 'Other']
+    },
+    city: {
+        type: String,
+        required: [true, 'City Required'],
+        trim: true
+    },
     imageURL: {
         type: String,
         default: '',

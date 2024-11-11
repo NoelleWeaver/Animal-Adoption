@@ -25,6 +25,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', pet)
+app.use('/petProfile', pet)
 //Routes
 app.use(notFound)
 app.use(errorHandlerMiddleware);

@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Homepage</title>
 </head>
 <body>
+    <h1 class="title">Match</h1>
     <a href="adminPets">admin page</a>
     <a href="/addPet">Add Pet</a>
+
     <% if(!pets || pets.length === 0) { %>
         <h5>No pets available</h5>
         <% } else { %>
-            <% pets.forEach(function(pet) { %>
-                <h5> <%= pet.name %></h5>
-            <% }); %>
+            <a href="petProfile">
+                <ul>
+                    <% pets.forEach(function(pet) { %>
+                        <h5> <%= pet.name %></h5>
+                    <% }); %>
+                </ul>
+            </a>
         <% } %>
+
 </body>
 </html>
