@@ -127,5 +127,28 @@ router.route('/:id')
         }
     });
 
+    // Route for showing only dogs
+router.get('/pets/petDog', async (req, res) => {
+    try {
+        const dogs = await Pet.find({ category: 'dog' }); // Query for dogs only
+        res.render('pets', { pets: dogs, category: 'Dogs' }); // Render the 'pets.ejs' page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching pets');
+    }
+});
+
+// Route for showing only cats
+router.get('/pets/petCat', async (req, res) => {
+    try {
+        const cats = await Pet.find({ category: 'cat' }); // Query for cats only
+        res.render('pets', { pets: cats, category: 'Cats' }); // Render the 'pets.ejs' page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching pets');
+    }
+});
+
+
 
 module.exports = router;

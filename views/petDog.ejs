@@ -5,22 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/css/ionicons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Homepage</title>
+    <link rel="stylesheet" href="dog.css">
+    <title>Dogs</title>
 </head>
 <body>
-    <h1 class="title">Match</h1>
-    <a href="adminPets">Admin Page</a>
-    <a href="/addPet">Add Pet</a>
-
-    <div class="filter-buttons">
-        <a href="/views/petDog"><button onclick="filterPets('dog')">Dog</button></a>
-        <button onclick="filterPets('cat')">Cats</button>
-        <button onclick="filterPets('bird')">Birds</button>
-        <button onclick="filterPets('reptile')">Reptiles</button>
-        <button onclick="filterPets('other')">Others</button>
-    </div>
-
+    <p>Yay you did it</p>
     <% if (pets && pets.length > 0) { %>
         <ul>
             <% pets.forEach(function(pet) { %>
@@ -60,13 +49,6 @@
     <% } else { %>
         <h5>No pets available</h5>
     <% } %>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script>
-        function filterPets(category) {
-            window.location.href = `/pets/category/${category}`;
-        }
-    </script>
+    
 </body>
 </html>
