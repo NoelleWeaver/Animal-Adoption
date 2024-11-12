@@ -9,13 +9,8 @@
     margin: 0;
     font-family: Poppins;
     scrollbar-width: thin;
-    scrollbar-color: #6999ff #E7EDF2;
+    scrollbar-color: #a7c2fb #E7EDF2;
     color: #333;
-}
-button{
-    background-color: transparent;
-    background-color: none;
-    border: none;
 }
 
 i {
@@ -34,12 +29,11 @@ i {
     color: #000000;
 }
 
-
-
 .title{
     font-size: 100px;
+    text-align: center;
+    margin-left: 7%;
 }
-
 .container{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -76,14 +70,13 @@ i {
     font-size: 12px;
 }
 
-a{
+a {
     text-decoration: none;
-    display: contents;
 }
 
 ul{
     list-style-type: none;
-    display: relative;
+    display: inline;
 }
 
 .img-hover-zoom {
@@ -93,6 +86,7 @@ ul{
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 10px rgba(83, 83, 83, 0.5);
+    margin: 10%;
 }
 
 .img-hover-zoom img {
@@ -103,7 +97,6 @@ ul{
     border-radius: 20px;
     position: relative;
     z-index: -100;
-    display: block;
 }
 
 .img-hover-zoom:hover img {
@@ -114,8 +107,64 @@ ul{
     width: 22rem;
     height: auto;
     z-index: 500;
-    position: relative;
-    bottom: 0;
     border-radius: 20px;
-    background: transparent linear-gradient(0deg, #333 0%, #333 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(0deg, #333333c9 0%, #33333300 100%) 0% 0% no-repeat padding-box;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.filter-buttons button:hover{
+    cursor: pointer; 
+}
+
+.filter-buttons button {
+    width: 4.8rem;
+    height: 4.8rem;
+    margin-top: 20px;
+    margin: 2%;
+    border-radius: 100%;
+    color: #333;
+    border: 5px dotted #333;
+    font-weight: 900;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.pets {
+    background-color: rgb(210, 224, 243);
+}
+.dogs{
+    background-color:rgb(235, 205, 243);
+}
+.cats{
+    background-color:rgb(255, 239, 213);
+}
+.birds{
+    background-color:rgb(217, 237, 197);
+}
+.fishes{
+    background-color:rgb(183, 239, 234);
+}
+.other{
+    background-color:rgb(237, 200, 220);
+}
+
+.addPet {
+    float: right;
+    margin: 1%;
+    display: flex;
+    align-items: center;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
 }

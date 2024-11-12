@@ -42,7 +42,7 @@ const PetSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Category Required'],
-        enum: ['dog', 'cat', 'bird', 'reptile', 'other'],  // Ensure this field is used
+        enum: ['dog', 'cat', 'bird', 'fish', 'other'],  // Ensure this field is used
     },
     imageURL: {
         type: String,

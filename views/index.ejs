@@ -9,24 +9,25 @@
     <title>Homepage</title>
 </head>
 <body>
+    <a href="adminPets"><img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/system-administrator-male.png" alt="system-administrator-male"/>Admin Page</a>
+    <a class="addPet" href="/addPet"><img width="24" height="24" src="https://img.icons8.com/pulsar-line/48/plus-2-math.png" alt="plus-2-math"/>Add Pet</a>
     <h1 class="title">Match</h1>
-    <a href="adminPets">Admin Page</a>
-    <a href="/addPet">Add Pet</a>
+    
 
-    <!-- Filter Buttons -->
+    <h2>Categories</h2>
     <div class="filter-buttons">
-        <button onclick="filterPets('all')">All</button>
-        <button onclick="filterPets('dog')">Dogs</button>
-        <button onclick="filterPets('cat')">Cats</button>
-        <button onclick="filterPets('bird')">Birds</button>
-        <button onclick="filterPets('reptile')">Reptiles</button>
-        <button onclick="filterPets('other')">Others</button>
+        <button class="pets" onclick="filterPets('all')"><img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/animal-shelter.png" alt="animal-shelter"/>All</button>
+        <button class="dogs" onclick="filterPets('dog')"><img width="32" height="32" src="https://img.icons8.com/windows/32/dog-bone.png" alt="dog-bone"/>Dogs</button>
+        <button class="cats" onclick="filterPets('cat')"><img width="32" height="32" src="https://img.icons8.com/pastel-glyph/64/clew--v1.png" alt="clew--v1"/>Cats</button>
+        <button class="birds" onclick="filterPets('bird')"><img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/lightweight.png" alt="lightweight"/>Birds</button>
+        <button class="fishes" onclick="filterPets('fish')"><img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/clown-fish.png" alt="clown-fish"/>Fishes</button>
+        <button class="other" onclick="filterPets('other')"><img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/dog-footprint.png" alt="dog-footprint"/>Others</button>
     </div>
 
     <ul id="pets-list">
         <% pets.forEach(function(pet) { %>
             <li class="pet-item" data-category="<%= pet.category %>">
-                <div class="shadow"></div>
+                <div class="shadow">
                     <div class="img-hover-zoom img-hover-zoom--xyz">
                         <a href="/petProfile/<%= pet._id %>">
                             <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
@@ -41,7 +42,6 @@
                         <% } else if (pet.gender === 'female') { %>
                             <ion-icon class="female" name="female"></ion-icon>
                         <% } %>
-                        <!-- Favorite Button -->
                         <form action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
                             <button class="favorite-btn" data-pet-id="<%= pet._id %>">
                                 <% if (favorites && favorites.includes(pet._id.toString())) { %>
@@ -51,6 +51,7 @@
                                 <% } %>
                             </button>
                         </form>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -60,14 +61,13 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
-        // JavaScript to filter pets by category on the same page
         function filterPets(category) {
             const pets = document.querySelectorAll('.pet-item');
             pets.forEach(pet => {
                 if (category === 'all' || pet.getAttribute('data-category') === category) {
-                    pet.style.display = 'block'; // Show the pet if it matches the category
+                    pet.style.display = 'block';
                 } else {
-                    pet.style.display = 'none'; // Hide the pet if it doesn't match
+                    pet.style.display = 'none';
                 }
             });
         }

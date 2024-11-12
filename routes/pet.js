@@ -36,7 +36,7 @@ router.route('/petProfile/:id').get(getPet);
 
 router.route('/').get(async (req, res) => {
     try {
-      const pets = await Pet.find(); // Get all pets from the database
+      const pets = await Pet.find();
       const favorites = req.cookies.favorites ? JSON.parse(req.cookies.favorites) : []; // Get favorites from cookies
   
       // Render the homepage with pets and favorites passed in
@@ -60,7 +60,7 @@ router.post('/pets/create', upload.single('image'), async(req,res) => {
             description,
             history,
             city,
-            category,  // Ensure this is saved to the database
+            category,
             behavior,
             imageURL
         });
@@ -107,15 +107,14 @@ router.route('/:id')
           res.redirect('/');
         });
 
-      router.get('/pets/category/:category', async (req, res) => {
-        const category = req.params.category; // e.g., 'dog', 'cat', etc.
-        try {
-            // Find pets by category
-            const pets = await Pet.find({ category: category });
-        } catch (error) {
-            console.error('Error fetching pets by category:', error);
-            res.status(500).send('Error fetching pets');
-        }
-    });
+router.get('/pets/category/:category', async (req, res) => {
+    const category = req.params.category;
+    try {
+        const pets = await Pet.find({ category: category });
+    } catch (error) {
+        console.error('Error fetching pets by category:', error);
+        res.status(500).send('Error fetching pets');
+    }
+});
 
 module.exports = router;
