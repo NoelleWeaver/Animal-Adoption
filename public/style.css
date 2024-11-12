@@ -108,7 +108,7 @@ ul{
     height: auto;
     z-index: 500;
     border-radius: 20px;
-    background: transparent linear-gradient(0deg, #333333c9 0%, #33333300 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(0deg, #333333 0%, #33333300 50%) 0% 0% no-repeat padding-box;
 }
 
 h2 {

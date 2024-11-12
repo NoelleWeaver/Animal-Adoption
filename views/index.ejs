@@ -27,8 +27,9 @@
     <ul id="pets-list">
         <% pets.forEach(function(pet) { %>
             <li class="pet-item" data-category="<%= pet.category %>">
-                <div class="shadow">
-                    <div class="img-hover-zoom img-hover-zoom--xyz">
+                
+                <div class="img-hover-zoom img-hover-zoom--xyz">
+                    <div class="shadow">
                         <a href="/petProfile/<%= pet._id %>">
                             <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
                         </a>
