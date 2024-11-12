@@ -24,14 +24,6 @@ const getAllPets = asyncWrapper(async (req, res) => {
     res.status(200).render('index', {pets});
 })
 
-// const getPet = asyncWrapper(async (req, res) => {
-//     const {id: petID} = req.params
-//     const pet = await Pet.find({_id:petID})
-//     if(!pet) {
-//         return next(createCustomError('No Pet with Id' + petID, 404))
-//     }
-//     res.status(200).render('petProfile', {pet})
-// })
 const getPet = asyncWrapper(async (req, res) => {
     try {
         const pet = await Pet.findById(req.params.id);

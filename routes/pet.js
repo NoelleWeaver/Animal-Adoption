@@ -90,65 +90,32 @@ router.route('/:id')
     router.post('/pets/favorite/:petId', (req, res) => {
         const petId = req.params.petId;
         let favorites = req.cookies.favorites ? JSON.parse(req.cookies.favorites) : [];
-      
+    
         // Toggle the favorite status of the pet
         if (favorites.includes(petId)) {
-          // Remove the pet from favorites (unfavorite)
-          favorites = favorites.filter(id => id !== petId);
+            // Remove the pet from favorites (unfavorite)
+            favorites = favorites.filter(id => id !== petId);
         } else {
-          // Add the pet to favorites
-          favorites.push(petId);
+            // Add the pet to favorites
+            favorites.push(petId);
         }
-      
+    
         // Update the cookie with the new favorites list
         res.cookie('favorites', JSON.stringify(favorites), { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true });
-      
-        // Redirect back to the homepage (or wherever you'd like)
-        res.redirect('/');
-      });
+    
+          // Redirect back to the homepage (or wherever you'd like)
+          res.redirect('/');
+        });
 
       router.get('/pets/category/:category', async (req, res) => {
         const category = req.params.category; // e.g., 'dog', 'cat', etc.
         try {
             // Find pets by category
             const pets = await Pet.find({ category: category });
-    
-            if (pets.length === 0) {
-                // If no pets found, return a "no pets available" message
-                res.render('index', { pets: [], favorites: [] }); 
-            } else {
-                // Pass the pets and favorites to the view
-                const favorites = req.cookies.favorites ? JSON.parse(req.cookies.favorites) : [];
-                res.render('index', { pets, favorites });
-            }
         } catch (error) {
             console.error('Error fetching pets by category:', error);
             res.status(500).send('Error fetching pets');
         }
     });
-
-    // Route for showing only dogs
-router.get('/pets/petDog', async (req, res) => {
-    try {
-        const dogs = await Pet.find({ category: 'dog' }); // Query for dogs only
-        res.render('pets', { pets: dogs, category: 'Dogs' }); // Render the 'pets.ejs' page
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error fetching pets');
-    }
-});
-
-// Route for showing only cats
-router.get('/pets/petCat', async (req, res) => {
-    try {
-        const cats = await Pet.find({ category: 'cat' }); // Query for cats only
-        res.render('pets', { pets: cats, category: 'Cats' }); // Render the 'pets.ejs' page
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error fetching pets');
-    }
-});
-
-
 
 module.exports = router;

@@ -13,59 +13,63 @@
     <a href="adminPets">Admin Page</a>
     <a href="/addPet">Add Pet</a>
 
+    <!-- Filter Buttons -->
     <div class="filter-buttons">
-        <a href="/views/petDog"><button onclick="filterPets('dog')">Dog</button></a>
+        <button onclick="filterPets('all')">All</button>
+        <button onclick="filterPets('dog')">Dogs</button>
         <button onclick="filterPets('cat')">Cats</button>
         <button onclick="filterPets('bird')">Birds</button>
         <button onclick="filterPets('reptile')">Reptiles</button>
         <button onclick="filterPets('other')">Others</button>
     </div>
 
-    <% if (pets && pets.length > 0) { %>
-        <ul>
-            <% pets.forEach(function(pet) { %>
-                <li>
+    <ul id="pets-list">
+        <% pets.forEach(function(pet) { %>
+            <li class="pet-item" data-category="<%= pet.category %>">
+                <div class="shadow"></div>
                     <div class="img-hover-zoom img-hover-zoom--xyz">
-                        <div class="shadow">
-                            <a href="/petProfile/<%= pet._id %>">
-                                <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
-                            </a>
-                            <div class="container">
-                                <h2 class="name"><%= pet.name %></h2>
-                                <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                                <p class="age"><%= pet.age %></p>
-                            </div>
-                            <% if (pet.gender === 'male') { %>
-                                <ion-icon class="male" name="male"></ion-icon>
-                            <% } else if (pet.gender === 'female') { %>
-                                <ion-icon class="female" name="female"></ion-icon>
-                            <% } %>
-                            <!-- Favorite Button -->
-                            <form action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
-                                <% if (favorites && favorites.includes(pet._id.toString())) { %>
-                                    <button type="submit">
-                                        <i class="fa-solid fa-heart"></i>
-                                    </button>
-                                <% } else { %>
-                                    <button type="submit">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
-                                <% } %>
-                            </form>
+                        <a href="/petProfile/<%= pet._id %>">
+                            <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
+                        </a>
+                        <div class="container">
+                            <h2 class="name"><%= pet.name %></h2>
+                            <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                            <p class="age"><%= pet.age %></p>
                         </div>
+                        <% if (pet.gender === 'male') { %>
+                            <ion-icon class="male" name="male"></ion-icon>
+                        <% } else if (pet.gender === 'female') { %>
+                            <ion-icon class="female" name="female"></ion-icon>
+                        <% } %>
+                        <!-- Favorite Button -->
+                        <form action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
+                            <button class="favorite-btn" data-pet-id="<%= pet._id %>">
+                                <% if (favorites && favorites.includes(pet._id.toString())) { %>
+                                    <i class="fa-solid fa-heart"></i>
+                                <% } else { %>
+                                    <i class="fa-regular fa-heart"></i>
+                                <% } %>
+                            </button>
+                        </form>
                     </div>
-                </li>
-            <% }); %>
-        </ul>
-    <% } else { %>
-        <h5>No pets available</h5>
-    <% } %>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
+        // JavaScript to filter pets by category on the same page
         function filterPets(category) {
-            window.location.href = `/pets/category/${category}`;
+            const pets = document.querySelectorAll('.pet-item');
+            pets.forEach(pet => {
+                if (category === 'all' || pet.getAttribute('data-category') === category) {
+                    pet.style.display = 'block'; // Show the pet if it matches the category
+                } else {
+                    pet.style.display = 'none'; // Hide the pet if it doesn't match
+                }
+            });
         }
     </script>
 </body>
