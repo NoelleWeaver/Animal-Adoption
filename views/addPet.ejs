@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Pet</title>
+    <link rel="stylesheet" href="addStyle.css">
 </head>
 <body>
-    <a href="/">Return Home</a>
+    <a href="/">Return</a>
     <form action="/pets/create" method="POST" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Name of Pet" required>
-        <input type="text" name="age" placeholder="Age of Pet" required>
-        <input type="text" name="breed" placeholder="Breed of Pet" required>
-        <textarea name="description" placeholder="Description of Pet" required></textarea>
-        <textarea name="behavior" placeholder="Behavior of Pet" required></textarea>
+        <h1 class="title">New Pet</h1>
+        <input class="name" type="text" name="name" placeholder="Name of Pet" required>
+        <input class="age" type="text" name="age" placeholder="Age of Pet" required>
+        <input class="breed" type="text" name="breed" placeholder="Breed of Pet" required>
+        <textarea class="description" name="description" placeholder="Description of Pet" required></textarea>
+        <textarea class="behavior" name="behavior" placeholder="Behavior of Pet" required></textarea>
 
-        <!-- Category Dropdown -->
-        <label for="category">Category:</label>
-        <select name="category" id="category" required>
+        <select class="category" name="category" id="category" required>
             <option value="" disabled selected>Pick a Category</option>
             <option value="dog">Dog</option>
             <option value="cat">Cat</option>
@@ -25,12 +24,63 @@
             <option value="other">Other</option>
         </select>
 
-        <input type="text" name="history" placeholder="History of Pet" required>
-        <input type="text" name="city" placeholder="City of Pet" required>
-
-        <!-- Gender Dropdown -->
-        <label for="gender">Gender:</label>
-        <select name="gender" id="gender" required>
+        <input class="history" type="text" name="history" placeholder="History of Pet" required>
+        <input class="city" type="text" name="city" placeholder="City of Pet" required>
+        <select class="state" id="state" name="state" required>
+            <option value="">Select a State</option>
+            <option value="al">Alabama</option>
+            <option value="ak">Alaska</option>
+            <option value="az">Arizona</option>
+            <option value="ar">Arkansas</option>
+            <option value="ca">California</option>
+            <option value="co">Colorado</option>
+            <option value="ct">Connecticut</option>
+            <option value="de">Delaware</option>
+            <option value="fl">Florida</option>
+            <option value="ga">Georgia</option>
+            <option value="hi">Hawaii</option>
+            <option value="id">Idaho</option>
+            <option value="il">Illinois</option>
+            <option value="in">Indiana</option>
+            <option value="ia">Iowa</option>
+            <option value="ks">Kansas</option>
+            <option value="ky">Kentucky</option>
+            <option value="la">Louisiana</option>
+            <option value="me">Maine</option>
+            <option value="md">Maryland</option>
+            <option value="ma">Massachusetts</option>
+            <option value="mi">Michigan</option>
+            <option value="mn">Minnesota</option>
+            <option value="ms">Mississippi</option>
+            <option value="mo">Missouri</option>
+            <option value="mt">Montana</option>
+            <option value="ne">Nebraska</option>
+            <option value="nv">Nevada</option>
+            <option value="nh">New Hampshire</option>
+            <option value="nj">New Jersey</option>
+            <option value="nm">New Mexico</option>
+            <option value="ny">New York</option>
+            <option value="nc">North Carolina</option>
+            <option value="nd">North Dakota</option>
+            <option value="oh">Ohio</option>
+            <option value="ok">Oklahoma</option>
+            <option value="or">Oregon</option>
+            <option value="pa">Pennsylvania</option>
+            <option value="ri">Rhode Island</option>
+            <option value="sc">South Carolina</option>
+            <option value="sd">South Dakota</option>
+            <option value="tn">Tennessee</option>
+            <option value="tx">Texas</option>
+            <option value="ut">Utah</option>
+            <option value="vt">Vermont</option>
+            <option value="va">Virginia</option>
+            <option value="wa">Washington</option>
+            <option value="wv">West Virginia</option>
+            <option value="wi">Wisconsin</option>
+            <option value="wy">Wyoming</option>
+        </select>
+        
+        <select class="gender" name="gender" id="gender" required>
             <option value="" disabled selected>Pick a Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>

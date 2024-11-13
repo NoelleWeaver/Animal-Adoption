@@ -9,7 +9,7 @@
     <title>Homepage</title>
 </head>
 <body>
-    <a href="adminPets"><img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/system-administrator-male.png" alt="system-administrator-male"/>Admin Page</a>
+    <a class="admin" href="adminPets"><img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/system-administrator-male.png" alt="system-administrator-male"/>Admin Page</a>
     <a class="addPet" href="/addPet"><img width="24" height="24" src="https://img.icons8.com/pulsar-line/48/plus-2-math.png" alt="plus-2-math"/>Add Pet</a>
     <h1 class="title">Match</h1>
     
@@ -34,16 +34,11 @@
                             <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
                         </a>
                         <div class="container">
-                            <h2 class="name"><%= pet.name %></h2>
+                            <p class="name"><%= pet.name %></p>
                             <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
                             <p class="age"><%= pet.age %></p>
                         </div>
-                        <% if (pet.gender === 'male') { %>
-                            <ion-icon class="male" name="male"></ion-icon>
-                        <% } else if (pet.gender === 'female') { %>
-                            <ion-icon class="female" name="female"></ion-icon>
-                        <% } %>
-                        <form action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
+                        <form class="heart" action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
                             <button class="favorite-btn" data-pet-id="<%= pet._id %>">
                                 <% if (favorites && favorites.includes(pet._id.toString())) { %>
                                     <i class="fa-solid fa-heart"></i>
@@ -52,6 +47,13 @@
                                 <% } %>
                             </button>
                         </form>
+                        <div class="gender">
+                            <% if (pet.gender === 'male') { %>
+                                <ion-icon class="male" name="male"></ion-icon>
+                            <% } else if (pet.gender === 'female') { %>
+                                <ion-icon class="female" name="female"></ion-icon>
+                            <% } %>
+                        </div>
                         </div>
                     </div>
                 </div>

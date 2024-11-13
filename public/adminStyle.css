@@ -24,12 +24,6 @@ i {
 .female {
     color: rgb(255, 137, 188);
 }
-
-.title{
-    font-size: 100px;
-    text-align: center;
-    margin-left: 7%;
-}
 .container{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -113,71 +107,6 @@ ul{
 h2 {
     font-size: 30px;
     text-align: center;
-}
-
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.filter-buttons button:hover{
-    cursor: pointer; 
-}
-
-.filter-buttons button {
-    width: 4.8rem;
-    height: 4.8rem;
-    margin-top: 20px;
-    margin: 2%;
-    border-radius: 100%;
-    color: #333;
-    border: 5px dotted #333;
-    font-weight: 900;
-    font-family:'Courier New', Courier, monospace;
-}
-
-.pets {
-    background-color: rgb(210, 224, 243);
-}
-.dogs{
-    background-color:rgb(235, 205, 243);
-}
-.cats{
-    background-color:rgb(255, 239, 213);
-}
-.birds{
-    background-color:rgb(217, 237, 197);
-}
-.fishes{
-    background-color:rgb(183, 239, 234);
-}
-.other{
-    background-color:rgb(237, 200, 220);
-}
-
-.addPet {
-    float: right;
-    margin: 1%;
-    display: flex;
-    align-items: center;
-}
-.admin {
-    float: left;
-    margin: 1%;
-    display: flex;
-    align-items: center;
-}
-
-.favorite-btn {
-    background: none;
-    border: none;
-    position: relative;
-    float: right;
-    margin-top: -115%;
-    margin-right: 3%;
-    padding-left: 3%;
-    font-size: 20px;
 }
 .gender{
     position: relative;

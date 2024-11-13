@@ -50,7 +50,7 @@ router.route('/').get(async (req, res) => {
 //route to create pets and deal with the form submission
 router.post('/pets/create', upload.single('image'), async(req,res) => {
     try {
-        const { name, gender, age, breed, description, history, city, category, behavior  } = req.body
+        const { name, gender, age, breed, description, history, city, state, category, behavior  } = req.body
         const imageURL = req.file ? req.file.path : null
         const newPet = new Pet({
             name,
@@ -59,6 +59,7 @@ router.post('/pets/create', upload.single('image'), async(req,res) => {
             breed,
             description,
             history,
+            state,
             city,
             category,
             behavior,

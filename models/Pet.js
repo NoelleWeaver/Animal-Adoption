@@ -32,17 +32,24 @@ const PetSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: [true, 'Gender Required'],
-        "enum": ['male', 'female', 'other']
+        enum: ['male', 'female', 'other']
     },
     city: {
         type: String,
         required: [true, 'City Required'],
         trim: true
     },
+    state: {
+        type: String,
+        required: [true, 'State Required'],
+        enum: ['al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 
+            'mi','mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 
+            'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy'] 
+    },
     category: {
         type: String,
         required: [true, 'Category Required'],
-        enum: ['dog', 'cat', 'bird', 'fish', 'other'],  // Ensure this field is used
+        enum: ['dog', 'cat', 'bird', 'fish', 'other'],
     },
     imageURL: {
         type: String,
