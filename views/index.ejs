@@ -11,6 +11,8 @@
 <body>
     <a class="admin" href="adminPets"><img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/system-administrator-male.png" alt="system-administrator-male"/>Admin Page</a>
     <a class="addPet" href="/addPet"><img width="24" height="24" src="https://img.icons8.com/pulsar-line/48/plus-2-math.png" alt="plus-2-math"/>Add Pet</a>
+    <a href="/auth/login">Login</a>
+    <a href="/signup">SignUp</a>
     <h1 class="title">Match</h1>
     
 
@@ -24,42 +26,46 @@
         <button class="other" onclick="filterPets('other')"><img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/dog-footprint.png" alt="dog-footprint"/>Others</button>
     </div>
 
+    <div class="line"></div>
+
     <ul id="pets-list">
         <% pets.forEach(function(pet) { %>
             <li class="pet-item" data-category="<%= pet.category %>">
-                
-                <div class="img-hover-zoom img-hover-zoom--xyz">
-                    <div class="shadow">
-                        <a href="/petProfile/<%= pet._id %>">
+                <a href="/petProfile/<%= pet._id %>">
+                    <div class="img-hover-zoom img-hover-zoom--xyz">
+                        <div class="shadow">
                             <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
-                        </a>
-                        <div class="container">
-                            <p class="name"><%= pet.name %></p>
-                            <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                            <p class="age"><%= pet.age %></p>
-                        </div>
-                        <form class="heart" action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
-                            <button class="favorite-btn" data-pet-id="<%= pet._id %>">
-                                <% if (favorites && favorites.includes(pet._id.toString())) { %>
-                                    <i class="fa-solid fa-heart"></i>
-                                <% } else { %>
-                                    <i class="fa-regular fa-heart"></i>
+                            
+                            <div class="container">
+                                <p class="name"><%= pet.name %></p>
+                                <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                                <p class="age"><%= pet.age %> Years</p>
+                            </div>
+                            <form class="heart" action="/pets/favorite/<%= pet._id %>" method="POST" style="display: inline;">
+                                <button class="favorite-btn" data-pet-id="<%= pet._id %>">
+                                    <% if (favorites && favorites.includes(pet._id.toString())) { %>
+                                        <i class="fa-solid fa-heart"></i>
+                                    <% } else { %>
+                                        <i class="fa-regular fa-heart"></i>
+                                    <% } %>
+                                </button>
+                            </form>
+                            <div class="gender">
+                                <% if (pet.gender === 'male') { %>
+                                    <ion-icon class="male" name="male"></ion-icon>
+                                <% } else if (pet.gender === 'female') { %>
+                                    <ion-icon class="female" name="female"></ion-icon>
                                 <% } %>
-                            </button>
-                        </form>
-                        <div class="gender">
-                            <% if (pet.gender === 'male') { %>
-                                <ion-icon class="male" name="male"></ion-icon>
-                            <% } else if (pet.gender === 'female') { %>
-                                <ion-icon class="female" name="female"></ion-icon>
-                            <% } %>
-                        </div>
+                            </div>
+                            <p class="location"><%= pet.city %>, <%= pet.state %></p>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
         <% }); %>
     </ul>
+
+    <div class="line2"></div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

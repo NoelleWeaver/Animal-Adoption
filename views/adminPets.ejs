@@ -9,22 +9,19 @@
     <title>Admin</title>
 </head>
 <body>
-    <a href="/">return to home</a>
+    <a href="/"><i class="fa-solid fa-arrow-left"></i></a>
+    <h1 class="title">Admin</h1>
     <ul id="pets-list">
         <% pets.forEach(function(pet) { %>
-                
-                    <form action="/pets/delete/<%= pet.id %>" method="POST">
-                        <button type="submit"><ion-icon name="close"></ion-icon></button>
-                    </form>
+            
+            <li class="pet-item" data-category="<%= pet.category %>">
                 <div class="img-hover-zoom img-hover-zoom--xyz">
-                    <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
-                    
                     <div class="shadow">
-                        
+                        <img src="<%= pet.imageURL %>" alt="<%= pet.name %>">
                         <div class="container">
                             <p class="name"><%= pet.name %></p>
                             <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                            <p class="age"><%= pet.age %></p>
+                            <p class="age"><%= pet.age %> Years</p>
                         </div>
                         <div class="gender">
                             <% if (pet.gender === 'male') { %>
@@ -33,9 +30,12 @@
                                 <ion-icon class="female" name="female"></ion-icon>
                             <% } %>
                         </div>
-                        </div>
+                        <p class="location"><%= pet.city %>, <%= pet.state %></p>
+                        <form action="/pets/delete/<%= pet.id %>" method="POST">
+                            <button class="delete" type="submit"><ion-icon name="close"></ion-icon></button>
+                        </form>
                     </div>
-                </div>
+                </div> 
         <% }); %>
     </ul>
     
