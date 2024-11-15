@@ -82,6 +82,18 @@ router.post('/pets/delete/:id', async (req, res) => {
     }
 });
 
+router.post('/pets/delete/:id', async (req, res) => {
+    const userId = req.params.id;
+    try {
+        await User.findByIdAndDelete(userId);
+        res.status(200).redirect('/adminPets');
+    } catch (error) {
+        console.error("Error deleting pet:", error);
+        res.status(500).render('404', { error });
+    }
+});
+
+
 // Favorite/Unfavorite a pet
 router.post('/pets/favorite/:petId', (req, res) => {
     const petId = req.params.petId;

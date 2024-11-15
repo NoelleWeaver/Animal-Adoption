@@ -164,3 +164,29 @@ i {
     font-size: 20px;
     padding: 2%;
 }
+.pets{
+    font-size: 50px;
+    text-align: center;
+}
+.line {
+    background-color: #333;
+    height: 4px;
+    width: 70%;
+    margin: 50px;    
+    border-radius: 20px;
+    margin-left: 15%;
+}
+
+.line2 {
+    background-color: #333;
+    height: 4px;
+    width: 70%;
+    margin: 50px;    
+    border-radius: 20px;
+    margin-left: 15%;
+}
+
+.users {
+    font-size: 50px;
+    text-align: center;
+}
