@@ -236,3 +236,57 @@ h2 {
     border-radius: 8px; /* Optional styling */
     padding: 10px;
 }
+
+.signup i {
+    color: #333;
+    padding: 5px;
+}
+
+.login i{
+    color: #333;
+    padding: 5px;
+}
+
+.signup{
+    background-color: #fff;
+    border: none;
+    padding: 10px 9px;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 1%;
+}
+
+.login{
+    background-color: #fff;
+    border: none;
+    padding: 10px 9px;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 8.7%;
+}
+.admin{
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.addPet{
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}

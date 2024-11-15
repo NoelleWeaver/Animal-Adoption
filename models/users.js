@@ -4,26 +4,20 @@ const bcrypt = require('bcrypt');  // To hash passwords
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: [true, 'Username is required'],
+        required: [true, "Username is required"],
         unique: true,
-        trim: true,
-        minlength: [3, 'Username must be at least 3 characters long']  // Minimum length for username
+        trim: true
     },
     email: {
         type: String,
-        required: [true, 'Email is required'],
+        required: [true, "Email is required"],
         unique: true,
-        match: [/\S+@\S+\.\S+/, 'Invalid email format']
+        match: [/\S+@\S+\.\S+/, "Invalid email format"]
     },
     password: {
         type: String,
-        required: [true, 'Password is required'],
-        minlength: [8, 'Password must be at least 8 characters long']
-    },
-    role: {
-        type: String,
-        enum: ['user', 'admin'], // Only "user" or "admin" are allowed
-        default: 'user'  // Default role is "user"
+        required: [true, "Password is required"],
+        minlength: 8
     }
 }, { timestamps: true });  // Automatically adds createdAt and updatedAt
 

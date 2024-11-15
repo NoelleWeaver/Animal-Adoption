@@ -7,7 +7,7 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
+
     
     <!-- Display any error message if present -->
     <% if (errorMessage) { %>
@@ -16,6 +16,7 @@
 
     <!-- Login form -->
     <form action="/login" method="POST">
+        <h1>Login</h1>
         <form action="/auth/login" method="POST">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" required>

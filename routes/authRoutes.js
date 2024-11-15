@@ -1,17 +1,15 @@
 // authRoutes.js
 const express = require('express');
 const router = express.Router();
-const users = require('../controllers/authController'); // Ensure the path to the controller is correct
+const authController = require("../controllers/authController");
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
-// Render the login page
-router.get('/login', users.renderLoginPage);
 
-// Handle login form submission
-router.post('/login', users.loginUser);
+router.get("/login", (req, res) => {
+    res.render("login"); // Render the login page
+});
 
-// Handle logout
-router.post('/logout', users.logoutUser);
+router.post("/login", authController.login);
 
 // routes/auth.js
  // Your User schema file
@@ -38,7 +36,11 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post("/signup", users.signup);
+router.get("/signup", (req, res) => {
+    res.render("signup"); // Render signup.ejs
+});
+
+router.post("/signup", authController.signup);
 
 // Login route
 router.post('/login', async (req, res) => {

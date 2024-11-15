@@ -7,63 +7,58 @@ exports.renderLoginPage = (req, res) => {
     res.render('login', { errorMessage: null });
 };
 
-// Handle login form submission
-exports.loginUser = async (req, res) => {
-    const { email, password } = req.body;
 
-    // Basic input validation
-    if (!email || !password) {
-        return res.render('login', { errorMessage: 'Please fill in all fields.' });
-    }
-
+exports.login = async (req, res) => {
     try {
-        // Find the user in the database
+        const { email, password } = req.body;
+        
+        // Fetch user by email and check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.render('login', { errorMessage: 'Invalid email or password.' });
+            console.log("User not found");
+            return res.status(400).json({ message: "Invalid email or password" });
         }
 
-        // Check if the password is correct
+        // Check if password matches
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.render('login', { errorMessage: 'Invalid email or password.' });
+            console.log("Password does not match");
+            return res.status(400).json({ message: "Invalid email or password" });
         }
 
-        // Authentication successful; create a session or JWT token
-        req.session.userId = user._id;
-        res.redirect('/dashboard'); // Redirect to a secure page after login (e.g., user dashboard)
+        // If login successful
+        console.log("Login successful");
+        res.redirect("/");
     } catch (error) {
-        console.error('Error during login:', error);
-        res.render('login', { errorMessage: 'Something went wrong, please try again.' });
+        console.error("Login error:", error);
+        res.status(500).json({ message: "Something went wrong, please try again", error: error.message });
     }
+    
 };
 
 exports.signup = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        // Check if user already exists
+        // Check if the user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: "Email already in use" });
+            return res.status(400).json({ message: "User already exists" });
         }
 
-        // Hash the password
+        // Hash password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create a new user
-        const user = new User({
+        const newUser = new User({
             username,
             email,
-            password: hashedPassword,
+            password: hashedPassword
         });
 
-        await user.save();
-
-        res.status(201).json({ message: "User registered successfully" });
+        await newUser.save();
+        res.redirect("/login");
     } catch (error) {
-        console.error("Error during signup:", error);
-        res.status(500).json({ message: "An error occurred, please try again later" });
+        console.error("Signup error:", error);
+        res.status(500).json({ message: "Something went wrong during signup" });
     }
 };
 
