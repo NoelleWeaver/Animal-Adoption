@@ -1,4 +1,5 @@
 const Pet = require('../models/Pet')
+const User = require('../models/User')
 const asyncWrapper = require('../middleware/async')
 const {createCustomError} = require('../errors/custom-error')
 
@@ -13,20 +14,11 @@ const getAddPetsPage = async(req,res) => {
 const getAdminPetsPage = async(req,res) => {
     try {
         const pets = await Pet.find({})
-        res.status(200).render('adminPets', {pets})
+        res.status(200).render('adminPets', {pets}, {users})
     } catch(error){
         res.status(500).render('404', {error})
     }
     }
-
-const getDashboard = async (req, res) => {
-    try {
-        const users = await User.find(); // Fetch all users from DB
-        res.render('dashboard', { Users: users }); // Send users to the dashboard.ejs
-    } catch (error) {
-        res.status(500).send({ message: 'Error fetching users', error: error.message });
-    }
-};
 
 const getAllPets = asyncWrapper(async (req, res) => {
     const pets = await Pet.find({})

@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true })); // Body parser middleware (Expr
 
 
 app.use(session({
-    secret: 'yourSecretKey', // Change this to a strong secret in production
+    secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: true,
 }));
@@ -39,9 +39,16 @@ app.use(session({
 
 // Routes
 app.use('/', pet);
-app.use('/petProfile', pet); // You might want to use more specific route handlers
+app.use('/petProfile', pet);
 app.use(authRoutes);
 app.use('/auth', authRoutes);
+app.get('/login', (req, res) => {
+    res.render('login', { errorMessage: null });
+});
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandlerMiddleware);

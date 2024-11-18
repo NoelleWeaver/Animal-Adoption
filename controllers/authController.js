@@ -17,46 +17,27 @@ const generateToken = (user) => {
 };
 
 // Handle Signup
-exports.signup = async (req, res, salt) => {
+exports.signup = async (req, res) => {
     const { username, email, password } = req.body;
+    const redirectTo = req.body.redirectTo || '/';
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 10, "superSecret", salt) {}
-        const newUser = new User({ username, email, password: hashedPassword });
-        await newUser.save();
+        // Create user (password will be hashed automatically in the pre-save hook)
+        const newUser = await User.create({ username, email, password });
 
-        const token = generateToken(newUser);
-        res.status(201).json({
-            message: 'User registered successfully!',
-            token,
-        });
+        console.log("User registered:", newUser);
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET || 'defaultSecretKey', { expiresIn: '1h' });
+
+        // Set cookie with the token
+        res.cookie('token', token, { httpOnly: true });
+
+        // Redirect after successful signup
+        res.redirect(redirectTo);
     } catch (error) {
-        res.status(500).json({ message: 'Error registering user', error: error.message });
-    }
-};
-
-// Handle Login
-exports.login = async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
-
-        const token = generateToken(user);
-        res.status(200).json({
-            message: 'Login successful!',
-            token,
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Error logging in', error: error.message });
+        console.error("Error during registration:", error);
+        res.status(400).render('signup', { errorMessage: 'Error registering user', redirectTo });
     }
 };
 
